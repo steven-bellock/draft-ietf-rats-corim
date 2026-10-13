@@ -1636,8 +1636,8 @@ CoRIM uses `environment-map` to identify components and groupings of components 
 Trust dependency means that an environment can only be fully trusted if one or more trustee environments have been appraised and found to be trustworthy.
 A candidate environment can only be trusted if the trustee environments it depends on exist, have been appraised and are found to be trustworthy.
 
-The first four phases of appraisal (see {{sec-match-and-augment}}) might not determine whether a component is trustworthy.
-Subsequent Verifier stages or Relying Party processing might be needed to finalize trustworthiness.
+The first four phases of appraisal (see {{sec-appraisal-phases}}) might not determine whether a component is trustworthy.
+Subsequent Verifier phases or Relying Party processing might be needed to finalize trustworthiness.
 Therefore, the trustworthiness of trustee domains MUST be appraised before the trustworthiness of the subject domain can be finalized.
 Consequently, trust dependency semantics may need to be represented in Attestation Results if Relying Parties play a role in finalizing which components are trustworthy.
 
