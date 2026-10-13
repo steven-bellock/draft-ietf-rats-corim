@@ -1087,14 +1087,17 @@ The following describes each member of the `measurement-values-map`.
 
 * `version` (index 0): Typically changes whenever the measured environment is updated.
   Described in {{sec-comid-version}}.
+  Comparison rules are defined in {{sec-cmp-version}}.
 
 * `svn` (index 1): The security version number typically changes only when a security relevant change is made to the measured environment.
   Described in {{sec-comid-svn}}.
+  Comparison rules are defined in {{sec-cmp-svn}}.
 
 * `digests` (index 2): Contains the digest(s) of the measured environment
   together with the respective hash algorithm used in the process.
   It uses the `digests-type`.
   Described in {{sec-common-hash-entry}}.
+  Comparison rules are defined in {{sec-cmp-digests}}.
 
 * `flags` (index 3): Describes security relevant operational modes.
   For example, whether the environment is in a debug mode, recovery mode, not fully
@@ -1106,6 +1109,7 @@ The following describes each member of the `measurement-values-map`.
   The vendor determines the encoding of `raw-value`.
   When used for comparison, the `tagged-masked-raw-value` variant includes a mask indicating which bits in the value to compare.
   Described in {{sec-comid-raw-value-types}}.
+  Comparison rules are defined in {{sec-cmp-raw-value}}.
 
 * `raw-value-mask-DEPRECATED` (index 5): Is an obsolete method of indicating which bits in a raw value to compare. New CoMID files should use the `tagged-masked-raw-value` on index 4 instead of using index 5.
 
@@ -1132,6 +1136,7 @@ The following describes each member of the `measurement-values-map`.
   Matching is described in {{sec-cryptokeys-matching}}.
 
 * `integrity-registers` (index 14): A group of one or more named measurements associated with the environment.  Described in {{sec-comid-integrity-registers}}.
+  Comparison rules are defined in {{sec-cmp-integrity-registers}}.
 
 * `int-range` (index 15): An integer value or an inclusive integer range that can be compared with linear order.
   Described in {{sec-comid-int-range}}.
@@ -1734,6 +1739,7 @@ in these CoRIMs.
 
 In a more complex case, there may be multiple authorities that issue CoTLs at different points in time.
 An Appraisal Policy for Evidence may dictate how multiple CoTLs are to be processed within the Verifier.
+CoTL processing by the Verifier is described in {{sec-cotl-extraction}}.
 
 ## Structure
 
@@ -2553,13 +2559,13 @@ The Verifier MUST discard any tags that are not syntactically or semantically va
 Cross-referenced triples MUST be successfully resolved.
 An example of a cross-referenced triple is a CoMID-CoSWID linking triple described in {{sec-comid-triple-coswid}}.
 
-#### CoTL Extraction
+#### CoTL Extraction {#sec-cotl-extraction}
 
 (This section is not applicable if the Verifier appraisal policy does not require CoTLs.)
 
 CoTLs that are outside their validity period MUST be discarded.
 
-The Verifier processes all CoTLs that are valid at the time of Evidence appraisal and activates all referenced tags.
+The Verifier processes all CoTLs that are valid at the time of Evidence appraisal and activates all referenced tags, as described in {{sec-cotl}}.
 
 Depending on any locally configured authorization policies, the Verifier MAY decide to discard some of the available and valid CoTLs.
 Such policies model the trust relationships between the Verifier Owner and the relevant suppliers, and are out of the scope of the present document.
@@ -3164,13 +3170,13 @@ If the processor is unable to determine the applicable comparison algorithm for 
 
 The following subsections define the comparison algorithms for the `measurement-values-map` attributes defined by this specification.
 
-###### Comparison for version entries
+###### Comparison for version entries {#sec-cmp-version}
 
 The value stored under `measurement-values-map` codepoint 0 is of type `version-map`.
 
 Since, in general - with the exception of `semver` - they are colloquial versions that cannot specify ordering, two `version-map` values can only be compared for equality.
 
-###### Comparison for svn entries
+###### Comparison for svn entries {#sec-cmp-svn}
 
 The value stored under `measurement-values-map` codepoint 1 is a security version number of type `svn-type-choice`.
 
@@ -3251,7 +3257,7 @@ The comparison MUST return false if there are no hash algorithms in common betwe
 The comparison MUST return false if the value associated with any common hash algorithm identifier in the C-ECT differs from the value for the same algorithm identifier in the ACS-ECT.
 If all the values associated with the common hash algorithm identifiers match, the comparison returns true.
 
-###### Comparison for raw-value entries
+###### Comparison for raw-value entries {#sec-cmp-raw-value}
 
 A `raw-value` entry contains binary data.
 
