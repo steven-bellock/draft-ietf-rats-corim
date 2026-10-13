@@ -1395,7 +1395,7 @@ A `min` or `max` of `null` means that the range is effectively unbounded in that
 The `measurement-values-map` entries at indices 16-19 support generic boolean, numeric, text, and byte-string measurements.
 For the numeric, text and byte-string entries, matching semantics are configurable: rather than adding a separate codepoint for each desired matching criterion, these entries use CBOR-tagged wrappers to encode the matching logic alongside the value:
 
-* Bare (untagged) value means exact match: the target value must equal the entry's value.
+* Bare (untagged) value means exact match: the target value must equal the bare value.
 * CBOR tag 566 (`tagged-*-set`, numeric, text and byte-string types only) means set match: the target value must equal one of the values in the array; at least two alternatives MUST be provided.
 * CBOR tag 565 (`tagged-number-range`, numeric types only) means range match: the target value must lie within the inclusive [min, max] interval; `null` means unbounded.
 
