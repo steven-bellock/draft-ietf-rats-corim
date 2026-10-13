@@ -726,7 +726,7 @@ MTI Triples:
 
 OTI Triples:
 
-* Conditional Endorsement Series triples: describing conditional endorsements that are evaluated using a special matching algorithm ({{sec-comid-triple-cond-endors}}).
+* Conditional Endorsement Series triples: describing conditional endorsements that are evaluated using a special matching algorithm ({{sec-comid-triple-cond-series}}).
 * Device Identity triples: containing cryptographic credentials - for example, an IDevID - identifying a device ({{sec-comid-triple-identity}}).
 * Attestation Key triples: containing cryptographic keys that are used to verify the integrity protection on the Evidence received from the Attester ({{sec-comid-triple-attest-key}}).
 * Trust dependency triples: describing trust relationships between domains, i.e., collection of related environments and their measurements ({{sec-comid-triple-trust-dependency}}).
